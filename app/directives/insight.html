@@ -1,0 +1,19 @@
+<div>
+    <div class="insight-vote-panel">
+        <div class="popular-vote" ng-click="toggleVotePanel($event)">
+            <div>{{ insight.popular_choice.choice }} {{insight.popular_choice.count || ""}}</div>
+        </div>
+        <div class="vote-panel">
+                <div class="button-side">
+                    <a ui-sref="article"><button type="button" class="btn btn-primary vote-panel-back-button" ng-click="toggleVotePanel(event)"></button></a>
+                </div>
+                <div class="vote-side">
+                    <div class="btn-group btn-group-justified">
+                        <label class="btn btn-success" no-click require-auth ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk" ng-disabled="radioModel.disabled">
+                            {{choice.choice}} {{choice.count}} <div class="btn btn-warning" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk"></div>
+                        </label>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

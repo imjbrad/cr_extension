@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "CR",
+  "description": "Learn more about the news articles you read on the web. Discover community insights and ask questions that help you understand complex current events.",
+  "version": "0.1",
+
+  "permissions": [
+    "http://127.0.0.1:8000/*"
+  ],
+
+  "permissions": [
+    "storage"
+  ],
+
+  "browser_action": {
+    "default_popup": "/app/index.html"
+  }
+}

@@ -1,0 +1,22 @@
+<section ui-view="overhead" class="overhead">
+</section>
+<section ng-controller="ArticleViewCtrl">
+    <h5>
+        {{ article.title }} &#8212;<span ng-repeat="author in article.authors">{{ author.name }}{{$last-1 ? ', & ' : ($last ? '' : ', ')}}</span>
+        <br>
+        {{ article.publisher.name }}
+    </h5>
+    <section class="overall-insights">
+    <h5 class="section-header">OVERALL</h5>
+    <span ng-repeat="insight in article.insight_votes.ov">
+        <insight-vote-panel article-pk="article.pk" insight="insight"></insight-vote-panel>
+    </span>
+    </section>
+
+    <section class="top-insights">
+    <h5 class="section-header">TOP</h5>
+    <span ng-repeat="insight in article.insight_votes.top">
+        <insight-vote-panel article-pk="article.pk" insight="insight"></insight-vote-panel>
+    </span>
+    </section>
+</section>

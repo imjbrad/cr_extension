@@ -1,0 +1,77 @@
+/* app css stylesheet */
+@import "base/bourbon/bourbon";
+
+*{box-sizing: border-box;}
+
+$app-width: 300px;
+
+html, body{
+  width: $app-width;
+  height: 1436px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.section-header {
+  text-align: center;
+  margin: auto;
+}
+
+.insight-vote-panel {
+  height: 30px;
+  width: 210%;
+  overflow: hidden;
+  border:1px solid red;
+
+  .popular-vote, .vote-panel {
+    float: left;
+    height: 100%;
+    width: $app-width;
+  }
+
+  .popular-vote {
+    cursor: pointer;
+    -webkit-transition: margin-left .2s $ease-in-out-quint;
+
+    &.move-over {
+      margin-left: -$app-width;
+    }
+  }
+
+  .vote-panel{
+    display: flex;
+    .button-side, .vote-side {align-self: center;}
+    .button-side {width: 10%; float:left;}
+    .vote-side {width: 89%; float:right; height: 100%;}
+    .vote-side .btn-group, .vote-side .btn-group .btn{
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .vote-side .btn-group .btn{
+      line-height: normal;
+    }
+
+  }
+
+}
+
+[ui-view='overhead'] {
+  border: 1px solid black;
+  overflow: hidden;
+  -webkit-transition:all .5s $ease-in-out-quad;
+  .overhead-content{
+  }
+}
+
+[ui-view='overhead'].ng-enter, [ui-view='overhead'].ng-leave.ng-leave-active{
+  height: auto;
+  max-height: 0;
+}
+
+[ui-view='overhead'].ng-enter.ng-enter-active, [ui-view='overhead'].ng-leave{
+  max-height: 200px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

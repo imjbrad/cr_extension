@@ -1,0 +1,61 @@
+/* app css stylesheet */
+* {
+  box-sizing: border-box; }
+
+html, body {
+  width: 300px;
+  height: 1436px;
+  margin: 0;
+  overflow-x: hidden; }
+
+.section-header {
+  text-align: center;
+  margin: auto; }
+
+.insight-vote-panel {
+  height: 30px;
+  width: 210%;
+  overflow: hidden;
+  border: 1px solid red; }
+  .insight-vote-panel .popular-vote, .insight-vote-panel .vote-panel {
+    float: left;
+    height: 100%;
+    width: 300px; }
+  .insight-vote-panel .popular-vote {
+    cursor: pointer;
+    -webkit-transition: margin-left 0.2s cubic-bezier(0.86, 0, 0.07, 1); }
+    .insight-vote-panel .popular-vote.move-over {
+      margin-left: -300px; }
+  .insight-vote-panel .vote-panel {
+    display: flex; }
+    .insight-vote-panel .vote-panel .button-side, .insight-vote-panel .vote-panel .vote-side {
+      align-self: center; }
+    .insight-vote-panel .vote-panel .button-side {
+      width: 10%;
+      float: left; }
+    .insight-vote-panel .vote-panel .vote-side {
+      width: 89%;
+      float: right;
+      height: 100%; }
+    .insight-vote-panel .vote-panel .vote-side .btn-group, .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
+      height: 100%;
+      box-sizing: border-box; }
+    .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
+      line-height: normal; }
+
+[ui-view='overhead'] {
+  border: 1px solid black;
+  overflow: hidden;
+  -webkit-transition: all 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
+
+[ui-view='overhead'].ng-enter, [ui-view='overhead'].ng-leave.ng-leave-active {
+  height: auto;
+  max-height: 0; }
+
+[ui-view='overhead'].ng-enter.ng-enter-active, [ui-view='overhead'].ng-leave {
+  max-height: 200px; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+/*# sourceMappingURL=app.css.map */

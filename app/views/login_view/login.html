@@ -1,0 +1,10 @@
+<div class="login overhead-content" ng-controller="LoginCtrl">
+    <div ng-show="auth_error" class="alert alert-danger">{{auth_error}}</div>
+    <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+
+        <input type="email" placeholder="email" name="email" class="form-control" ng-model="user.email" required>
+        <input type="password" name="password" placeholder="password" class="form-control" ng-model="user.password" ng-minlength="3" ng-maxlength="16" required>
+        <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
