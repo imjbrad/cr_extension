@@ -6,12 +6,13 @@
   "version": "0.1",
 
   "permissions": [
-    "http://127.0.0.1:8000/*"
-  ],
-
-  "permissions": [
+    "http://127.0.0.1:8000/*",
     "storage"
   ],
+
+  "background":{
+    "page": "/app/index.html"
+  },
 
   "browser_action": {
     "default_popup": "/app/index.html"

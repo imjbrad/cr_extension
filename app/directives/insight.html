@@ -1,11 +1,11 @@
 <div>
     <div class="insight-vote-panel">
         <div class="popular-vote" ng-click="toggleVotePanel($event)">
-            <div>{{ insight.popular_choice.choice }} {{insight.popular_choice.count || ""}}</div>
+            <div><span class="choice-label">{{ insight.popular_choice.choice }}</span> <span class="count">{{insight.popular_choice.count || ""}}</span></div>
         </div>
         <div class="vote-panel">
                 <div class="button-side">
-                    <a ui-sref="article"><button type="button" class="btn btn-primary vote-panel-back-button" ng-click="toggleVotePanel(event)"></button></a>
+                    <button type="button" class="cr-btn vote-panel-back-button" ng-click="toggleVotePanel(event)"></button>
                 </div>
                 <div class="vote-side">
                     <div class="btn-group btn-group-justified">

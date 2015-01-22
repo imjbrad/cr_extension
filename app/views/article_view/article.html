@@ -1,22 +1,28 @@
 <section ui-view="overhead" class="overhead">
 </section>
-<section ng-controller="ArticleViewCtrl">
-    <h5>
-        {{ article.title }} &#8212;<span ng-repeat="author in article.authors">{{ author.name }}{{$last-1 ? ', & ' : ($last ? '' : ', ')}}</span>
+<section ng-controller="ArticleViewCtrl" ng-show="article" id="article">
+    <header class="article-info">
+        {{ article.title }} &#8212;<span class="author" ng-repeat="author in article.authors">{{ author.name }}{{$last-1 ? ', & ' : ($last ? '' : ', ')}}</span>
         <br>
-        {{ article.publisher.name }}
-    </h5>
+        <span id="publisher">{{ article.publisher.name }}</span>
+    </header>
     <section class="overall-insights">
-    <h5 class="section-header">OVERALL</h5>
-    <span ng-repeat="insight in article.insight_votes.ov">
+    <h5 class="section-header"><span>OVERALL</span></h5>
+        <insight-vote-panel ng-repeat="insight in article.insight_votes.ov" article-pk="article.pk" insight="insight"></insight-vote-panel>
+    </section>
+
+    <section class="credibility-section">
+        <h5 class="section-header"><span>CREDIBILITY</span></h5>
+    </section>
+
+    <section class="top-insights">
+        <h5 class="section-header"><span>TOP INSIGHTS</span></h5>
+    <span ng-repeat="insight in article.insight_votes.top">
         <insight-vote-panel article-pk="article.pk" insight="insight"></insight-vote-panel>
     </span>
     </section>
 
-    <section class="top-insights">
-    <h5 class="section-header">TOP</h5>
-    <span ng-repeat="insight in article.insight_votes.top">
-        <insight-vote-panel article-pk="article.pk" insight="insight"></insight-vote-panel>
-    </span>
+    <section class="questions-section">
+        <h5 class="section-header"><span>TOP QUESTIONS</span></h5>
     </section>
 </section>

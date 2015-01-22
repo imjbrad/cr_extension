@@ -69,9 +69,9 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             for (choice in $scope.insight.insight_votes) {
                 if ($scope.insight.insight_votes[choice].count > max_count) {
                     max_count = $scope.insight.insight_votes[choice].count;
-                    max_key = $scope.insight.insight_votes[choice].choice;
+                    max_key = $scope.insight.insight_votes[choice].choice_display_name;
                 } else if ($scope.insight.insight_votes[choice].count == max_count) {
-                    max_key += ((max_key == "" && max_key.indexOf("/") == -1 ? " " : "/") + $scope.insight.insight_votes[choice].choice);
+                    max_key += ((max_key == "" && max_key.indexOf("/") == -1 ? " " : "/") + $scope.insight.insight_votes[choice].choice_display_name);
                     max_count = $scope.insight.insight_votes[choice].count
                 }
             }
@@ -107,9 +107,10 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             angular.element($scope.currentInsightPanel).toggleClass("move-over");
         };
 
-        $scope.revoke = function(swap, callback){
-            console.log("trying to revoke");
+        $scope.revokable = ($scope.currentVote && $scope.currentVote.choice) ? true:false;
 
+        $scope.revoke = CRAuth.require_login(function(swap, callback){
+            console.log("trying to revoke");
             if($scope.currentVote && $scope.currentVote.choice){
                 Vote.delete({ article_id: $scope.article, topic_id: $scope.insight.pk, vote_id: $scope.currentVote.pk})
                     .$promise.then(function(data){
@@ -125,7 +126,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             }else{
                 console.log("no current vote to revoke");
             }
-        };
+        });
 
         $scope.vote = CRAuth.require_login(function(){
                 console.log("Trying to Vote");

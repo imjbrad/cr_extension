@@ -110,17 +110,25 @@ angular.module('cr.services.api', ['ngResource', 'angular-storage'])
             }
         }
 
-        auth.current_user = store.get("current_user") || null;
+        auth.current_user = (function() {
+            return store.get("current_user") || null;
+        })();
 
+
+        /**simple wrapper that requires
+         * login before execution
+         * @param fn
+         * @returns {Function}
+         */
         auth.require_login = function(fn) {
             if(fn){
-                return function callback(){
-                    if(!auth.current_user){
+                if(!auth.current_user){
+                    return function(){
                         console.log("Requiring Login");
                         $location.url('/article/login');
-                    }else{
-                        fn();
                     }
+                }else{
+                    return fn;
                 }
             }else{
                 console.log("Requiring Login");
