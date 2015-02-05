@@ -1,0 +1,10 @@
+<li class="question" ng-class="{'answered': question.answered}">
+    <div class="question-title">
+        {{question.title}}
+        <div class="question-control">
+            <button class="cr-btn upvote-button">{{question.upvotes}}^</button>
+            <button class="cr-btn follow-button">Follow</button>
+            <button class="cr-btn delete-button" ng-show="isQuestionOwner">Remove</button>
+        </div>
+    </div>
+</li>

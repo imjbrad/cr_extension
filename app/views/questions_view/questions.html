@@ -1,0 +1,6 @@
+<div id="questions_inline" ng-controller="QuestionsCtrl">
+    <a ui-sref="article">^ Back</a>
+    <ul class="question-list">
+        <question class="question" ng-repeat="question in article.questions" ng-class="{'answered': question.answered}">{{question.title}}</question>
+    </ul>
+</div>

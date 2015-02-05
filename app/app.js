@@ -6,8 +6,6 @@ angular.module('cr', [
   'ui.router',
   'ngAnimate',
 
-  'cr.directives.auth',
-
   'cr.views.login',
   'cr.views.article',
   'cr.views.alerts'
@@ -17,21 +15,21 @@ angular.module('cr', [
 
       $urlRouterProvider.otherwise("/article");
       $stateProvider
-        .state('article', {
-          url: "/article",
-          templateUrl: "/app/views/article_view/article.html"
-        })
-        .state('article.login', {
-          url: "/login",
-          views: {
-            overhead: {templateUrl: "/app/views/login_view/login.html"}
-          }
-        })
-        .state('article.alerts', {
-          url: "/alerts",
-          views: {
-            overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
-          }
-        });
+          .state('article', {
+            url: "/article",
+            templateUrl: "/app/views/article_view/article.html"
+          })
+          .state('article.login', {
+            url: "/login",
+            views: {
+              overhead: {templateUrl: "/app/views/login_view/login.html"}
+            }
+          })
+          .state('article.alerts', {
+            url: "/alerts",
+            views: {
+              overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
+            }
+          });
 
     });

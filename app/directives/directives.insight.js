@@ -21,7 +21,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             restrict: 'A',
             replace: false,
             link: function(scope, element, attr) {
-                console.log("binding no click");
+                //console.log("binding no click");
                 element.bind("click", function(e){
                     return false;
                 });
@@ -35,7 +35,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             if(CRAuth.current_user){
                 Vote.authGET({ article_id: $scope.article, topic_id: $scope.insight.pk}, function(vote){
                     console.log(vote);
-                    console.log("Current Vote found");
+                    //console.log("Current Vote found");
                     $scope.currentVote = vote;
                     $scope.radioModel.selectedChoice = ''+vote.choice;
                 });
@@ -62,7 +62,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
         }
 
         function calculatePopularVote() {
-            console.log("calculating popular vote");
+            //console.log("calculating popular vote");
             var max_count = 0,
                 max_key = "";
 
@@ -154,7 +154,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
                 }});
 
         $scope.init = function() {
-            console.log("Insight Vote Panel Init");
+            //console.log("Insight Vote Panel Init");
             getVote();
             calculatePopularVote();
         };

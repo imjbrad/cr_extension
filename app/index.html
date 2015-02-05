@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="cr" ng-csp>
 <head>
+  <base href="" target="_blank">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>CR</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/base/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/angular-csp.css">
   <base href="/">
@@ -18,30 +19,32 @@
   </div>
 
   <!--- components -->
-  <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="/app/bower_components/angular/angular.min.js"></script>
-  <script src="/app/bower_components/angular-route/angular-route.min.js"></script>
-  <script src="/app/bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="/app/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-  <script src="/app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="/app/bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="/app/bower_components/a0-angular-storage/dist/angular-storage.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/a0-angular-storage/dist/angular-storage.min.js"></script>
 
 
 
   <!--- controllers -->
-  <script src="/app/views/article_view/views.article.js"></script>
-  <script src="/app/views/login_view/views.login.js"></script>
-  <script src="/app/views/alerts_view/views.alerts.js"></script>
+  <script src="views/article_view/views.article.js"></script>
+  <script src="views/login_view/views.login.js"></script>
+  <script src="views/alerts_view/views.alerts.js"></script>
 
 
   <!--- services, directives, app -->
-  <script src="/app/services/services.js"></script>
-  <script src="/app/directives/directives.insight.js"></script>
-  <script src="/app/directives/directives.auth.js"></script>
+  <script src="services/services.alert.js"></script>
+  <script src="services/services.api.js"></script>
+  <script src="services/services.auth.js"></script>
+  <script src="directives/directives.insight.js"></script>
+  <script src="directives/directives.question.js"></script>
 
   <!--app-->
-  <script src="/app/app.js"></script>
+  <script src="app.js"></script>
 
 
 </body>

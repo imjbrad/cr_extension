@@ -1,4 +1,9 @@
 @font-face {
+  font-family: MuseoSans-900, sans-serif;
+  src: url("fonts/MuseoSans-900.otf");
+}
+
+@font-face {
   font-family: MuseoSans-700, sans-serif;
   src: url("fonts/MuseoSans-700.otf");
 }
@@ -15,12 +20,12 @@
 
 @font-face {
   font-family: MuseoSlab-500Italic, serif;
-  src: url("fonts/MuseoSlab-900Italic.otf");
+  src: url("fonts/MuseoSlab-500Italic.otf");
 }
 
 @font-face {
   font-family: MuseoSlab-100Italic, serif;
-  src: url("fonts/MuseoSlab-500Italic.otf");
+  src: url("fonts/MuseoSlab-100Italic.otf");
 }
 
 .section-header {
@@ -45,10 +50,14 @@
 
 }
 
+$cr-green: #00b233;
+$cr-deep-blue: #2e0a75;
 
 button.cr-btn {
   border: none;
   vertical-align: middle;
+  background:none;
+  cursor: pointer;
 
   &:focus, &:active {
     outline: none;
