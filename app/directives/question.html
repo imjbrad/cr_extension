@@ -1,10 +1,10 @@
-<li class="question" ng-class="{'answered': question.answered}">
+<li class="question" ng-class="{'answered': question.answered}" ng-show="question.pk">
     <div class="question-title">
         {{question.title}}
         <div class="question-control">
-            <button class="cr-btn upvote-button">{{question.upvotes}}^</button>
+            <button class="cr-btn upvote-button" ng-click="upvoteClick()">{{question.upvotes}}^</button>
             <button class="cr-btn follow-button">Follow</button>
-            <button class="cr-btn delete-button" ng-show="isQuestionOwner">Remove</button>
+            <button class="cr-btn delete-button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</button>
         </div>
     </div>
 </li>

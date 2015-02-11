@@ -267,6 +267,13 @@ body {
       font-family: MuseoSans-700, sans-serif;
       border: 2px solid #00b233;
       color: #00b233; }
+  .questions .question-list #more-questions-button {
+    font-family: MuseoSans-700, sans-serif;
+    border: 2px solid black;
+    border-radius: 2px;
+    width: 100%; }
+    .questions .question-list #more-questions-button.disabled {
+      display: none; }
   .questions .question-list .pager .previous a, .questions .question-list .pager .next a {
     border: 2px solid black;
     border-radius: 2px; }

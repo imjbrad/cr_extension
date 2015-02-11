@@ -9,14 +9,18 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
         var auth = {};
 
         function _set_current_user(token, success){
+
             $http.defaults.headers.get = {Authorization: 'JWT ' + token};
 
             $http.get('http://127.0.0.1:8000/api/me/')
                 .success(function(data, status, headers, config) {
                     auth.current_user = {email:data.email, pk:data.user_id, token: token, exp: data.exp, original_auth: data.orig_iat ? false:true};
                     store.set("current_user", auth.current_user);
+
                     $rootScope.$broadcast('CRAuth.AuthenticationChanged');
+                    $rootScope.CRAuth = {};
                     $rootScope.CRAuth.authenticated = true;
+
                     _push_auth_headers();
                     console.log(auth.current_user);
 
@@ -33,10 +37,7 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
             if(auth.current_user && auth.current_user.token){
                 var header = 'JWT ' + auth.current_user.token;
 
-                $http.defaults.headers.post.Authorization =
-                    $http.defaults.headers.put.Authorization =
-                        $http.defaults.headers.patch.Authorization = header;
-                $http.defaults.headers.delete = {"Authorization": header};
+                $http.defaults.headers.common.Authorization = header;
                 console.log($http.defaults);
             }
         }
@@ -46,11 +47,6 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
         })();
 
 
-        /**simple wrapper that requires
-         * login before execution
-         * @param fn
-         * @returns {Function}
-         */
         auth.require_login = function(fn) {
             if(fn){
                 if(!auth.current_user){
@@ -68,36 +64,23 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
         };
 
         auth.refresh = function(){
-            //set auth headers on init
+            //push any existing headers
             _push_auth_headers();
 
-            //refresh if time is almost up
-            if(auth.current_user && auth.current_user.exp && (!auth.current_user.original_auth)){
-                var now = Date.now() / 1000, //from ms to s
-                    exp = auth.current_user.exp, //in seconds
-                    remainder = exp - now;
-
-                if (remainder <= 3600){ //one hour
-                    console.log("Extending Session");
-                    $http.post('http://127.0.0.1:8000/api/token-refresh/', {token: auth.current_user.token}).
-                        success(function(data, status, headers, config) {
-                            _set_current_user(data.token);
-                        }).
-                        error(function(data, status, headers, config) {
-                            console.log("CR tried to automatically extend your session but something went wrong. Try logging back in");
-                            auth.require_login();
-                        });
-                }else{
-                    console.log("Not Refreshing")
-                }
-
-                console.log("There are still roughly "+(remainder/60)+" min left before the session is expired")
+            //refresh the session, set a new current user, and re-push the headers
+            if(auth.current_user && auth.current_user.exp) {
+                console.log("Trying to Extend Session");
+                $http.post('http://127.0.0.1:8000/api/token-refresh/', {token: auth.current_user.token}).
+                    success(function (data, status, headers, config) {
+                        _set_current_user(data.token);
+                        console.log("Extended Session");
+                    }).
+                    error(function (data, status, headers, config) {
+                        console.log("CR tried to automatically extend your session but something went wrong. Try logging back in");
+                        auth.require_login();
+                    });
             }else{
-                console.log("CR can't extend the session... there is no current user with a non-original token")
-                //clean up
-                auth.logout();
-
-                //fresh login
+                console.log("No valid user available to refresh")
                 auth.require_login();
             }
         };

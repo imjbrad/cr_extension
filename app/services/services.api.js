@@ -17,7 +17,12 @@ angular.module('cr.services.api', ['ngResource', 'angular-storage'])
     .factory('Question', function($resource, CRAuth){
 
         return $resource('http://127.0.0.1:8000/api/article/:article_id/question/:question_id/',{}, {
-            'send': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/ask'},
+            'ask': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/ask'},
+
+            'findUpvote': {method: 'GET', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/find'},
+            'postUpvote': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+            'revokeUpvote': {method: 'DELETE', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+
             'all': {
                 method: 'GET',
                 headers: CRAuth.current_user && CRAuth.current_user.token ? {'Authorization':'JWT '+ CRAuth.current_user.token} : {},

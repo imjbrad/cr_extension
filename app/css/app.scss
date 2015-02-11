@@ -21,12 +21,10 @@ html, body {
   font-family: MuseoSans-300, sans-serif;
   font-size: 11px;
 
-  //border:1px solid red;
 }
 
 body{
   position: relative;
-  //height: auto;
   padding: 15px;
   -webkit-transition:all .2s $ease-in-out-quad;
 }
@@ -283,6 +281,18 @@ body{
           }
 
         }
+      }
+
+    }
+
+    #more-questions-button {
+      font-family: MuseoSans-700, sans-serif;
+      border: 2px solid black;
+      border-radius: 2px;
+      width: 100%;
+
+      &.disabled {
+        display: none;
       }
 
     }
