@@ -2,9 +2,15 @@
     <div class="question-title">
         {{question.title}}
         <div class="question-control">
-            <button class="cr-btn upvote-button" ng-click="upvoteClick()">{{question.upvotes}}^</button>
-            <button class="cr-btn follow-button">Follow</button>
-            <button class="cr-btn delete-button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</button>
+            <form id="questionControlForm" name="question.questionControlForm" novalidate>
+                <button type="button" class="btn btn-primary"  name="upvote_button" ng-model="upvoted" ng-change="toggle_upvote()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                    {{question.upvotes}}^
+                </button>
+                <button type="button" class="btn btn-primary" name="follow_button" ng-model="following" ng-change="toggle_follow()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                    {{ following ? "Following" : "Follow"}}
+                </button>
+                <button class="cr-btn delete-button" name="delete_button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</button>
+            </form>
         </div>
     </div>
 </li>

@@ -137,19 +137,19 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
                         $scope.vote()
                     })
                 }else{
-                    Vote.save({ article_id: $scope.article, topic_id: $scope.insight.pk}, {choice: $scope.radioModel.selectedChoice})
-                        .$promise.then(
-                        function(result){
-                            console.log("Successful Vote");
-                            console.log(result);
-                            $scope.currentVote = result;
-                        },
-                        function(error) {
-                            console.log("pushing error");
-                            console.log(error);
-                            CRAlerts.push({msg: error.data.detail || "Something went wrong."});
+                        Vote.save({ article_id: $scope.article, topic_id: $scope.insight.pk}, {choice: $scope.radioModel.selectedChoice})
+                            .$promise.then(
+                            function(result){
+                                console.log("Successful Vote");
+                                console.log(result);
+                                $scope.currentVote = result;
+                            },
+                            function(error) {
+                                console.log("pushing error");
+                                console.log(error);
+                                CRAlerts.push({msg: error.data.detail || "Something went wrong."});
 
-                        });
+                            });
                     simulateVote();
                 }});
 

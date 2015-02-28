@@ -12,38 +12,23 @@ angular.module('cr.directives.question', ['cr.services.api'])
             },
             controller: 'QuestionCtrl',
             templateUrl: '/app/directives/question.html',
-            link: function(scope, element, attr) {
+            link: function($scope, element, attr, $interval) {
+
+                if($scope.question.following){
+                    $scope.current_follow = $scope.question.following;
+                    $scope.following = 1;
+                }
+
+                if($scope.question.upvoted){
+                    $scope.upvoted = 1;
+                    $scope.current_upvote = $scope.question.upvoted;
+                }
+
             }
         };
     })
 
-    .controller('QuestionCtrl', function($scope, CRAuth, Question, $timeout){
-
-        function _simulateUpvote(){
-            $scope.question.upvotes += 1;
-            $scope.upvote = {pk:true};
-        }
-
-        function _simulateRevokeUpvote() {
-            $scope.question.upvotes -= 1;
-            $scope.upvote = {pk:false};
-        }
-
-        function _init(){
-            Question.findUpvote({article_id: 34, question_id: $scope.question.pk}, {},
-            function(data){
-                console.log("Found existing upvote for question "+$scope.question.pk);
-                $scope.upvote = {pk: data.pk};
-
-            },function(error){
-                console.log("Couldn't find existing upvote");
-            });
-    }
-
-        $scope.upvote = {
-            pk: false
-        };
-
+    .controller('QuestionCtrl', function($scope, CRAuth, Question, $timeout, $interval){
         $scope.isQuestionOwner = (CRAuth.current_user) ? ($scope.question.user == CRAuth.current_user.pk) : false;
 
         $scope.deleteQuestion = function() {
@@ -60,39 +45,75 @@ angular.module('cr.directives.question', ['cr.services.api'])
 
         };
 
-        $scope.upvoteClick = function() {
-            if(!$scope.upvote.pk){
-                $timeout(function(){
-                    Question.postUpvote({article_id: 34, question_id: $scope.question.pk}, {})
+        $scope.toggle_upvote = function() {
+
+            console.log("User has interacted with upvote button");
+
+            if($scope.upvoted){
+
+                console.log("Simulating Upvote");
+                $scope.question.upvotes += 1;
+
+                if(!$scope.current_upvote){
+
+                    Question.upvote({article_id: 34, question_id: $scope.question.pk}, {})
                         .$promise.then(
                         function(data){
-                            $scope.upvote = {pk:data.pk};
+                            $scope.current_upvote = data.pk;
                             console.log("Upvoted Question");
+
                         },function(error){
                             console.log(error);
                         });
-                }, 500);
-
-                _simulateUpvote();
-
+                }
             }else{
-                console.log("Should revoke upvote");
-                Question.revokeUpvote({article_id: 34, question_id: $scope.question.pk, upvote_id: $scope.upvote.pk}, {})
-                    .$promise.then(
-                    function(data){
-                        console.log("Revoked Upvote");
 
-                    },function(error){
-                        console.log(error);
-                    });
+                console.log("Simulating Revoke");
+                if ($scope.question.upvotes > 0)
+                    $scope.question.upvotes -= 1;
 
-                _simulateRevokeUpvote();
+                if($scope.current_upvote){
+
+                    Question.revokeUpvote({article_id: 34, question_id: $scope.question.pk, upvote_id: $scope.current_upvote}, {})
+                        .$promise.then(
+                        function(data){
+                            console.log("Revoked Upvote");
+                            $scope.current_upvote = null;
+                        },function(error){
+                            console.log(error);
+                        });
+                }
             }
-        };
-
-        $scope.followQuestion = function() {
 
         };
 
-        _init();
+        $scope.toggle_follow = function(){
+
+                if($scope.following){
+                    if(!$scope.current_follow){
+                        Question.follow({article_id: 34, question_id: $scope.question.pk}, {})
+                            .$promise.then(
+                            function(data){
+                                console.log("Followed");
+                                $scope.current_follow = data.pk;
+                            },function(error){
+                                console.log(error);
+                            });
+                    }
+                }else{
+                    if($scope.current_follow){
+                        Question.revokeFollow({article_id: 34, question_id: $scope.question.pk, follow_id: $scope.current_follow}, {})
+                            .$promise.then(
+                            function(data){
+                                console.log("Revoked Follow");
+                                $scope.current_follow = null;
+                            },function(error){
+                                console.log(error);
+                            });
+                    }
+                }
+
+
+        };
+
     });

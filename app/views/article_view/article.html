@@ -37,11 +37,13 @@
                 <button id="questionSubmit" type="submit" ng-disabled="questionForm.$invalid" class="cr-btn">Ask Question</button>
             </div>
         </form>
+
         <ul class="question-list">
             <question ng-repeat="question in filteredQuestions = (questionSet.allQuestions  | filter: questionFilter[questionFilter.selected] | orderBy: questionFilter.orderBy : true)" question="question"></question>
             <li ng-show="!filteredQuestions.length"></li>
             <button class="cr-btn" id="more-questions-button" ng-show="questionSet.next" ng-click="getMoreQuestions()">More Questions</button>
         </ul>
+
         <div ui-view="questions_inline" auto-scroll="true" class="move-slide">
         </div>
     </section>

@@ -19,9 +19,11 @@ angular.module('cr.services.api', ['ngResource', 'angular-storage'])
         return $resource('http://127.0.0.1:8000/api/article/:article_id/question/:question_id/',{}, {
             'ask': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/ask'},
 
-            'findUpvote': {method: 'GET', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/find'},
-            'postUpvote': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+            "upvote": {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
             'revokeUpvote': {method: 'DELETE', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+
+            'follow': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/follow/:follow_id'},
+            'revokeFollow': {method: 'DELETE', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/follow/:follow_id'},
 
             'all': {
                 method: 'GET',

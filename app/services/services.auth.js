@@ -109,9 +109,11 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
         return {
             responseError: function (rejection) {
                 //$rootScope.$emit('CRAuth.Interceptor.error', rejection);
-                //if (rejection.status == 403){
-                //    $location.url('/article/login');
-                //}
+
+                if (rejection.status == 0 && rejection.data == null){
+                    console.log("Check your connection");
+                }
+
                 return $q.reject(rejection);
             }
         };
