@@ -89,29 +89,36 @@ angular.module('cr.directives.question', ['cr.services.api'])
 
         $scope.toggle_follow = function(){
 
-                if($scope.following){
-                    if(!$scope.current_follow){
-                        Question.follow({article_id: 34, question_id: $scope.question.pk}, {})
-                            .$promise.then(
-                            function(data){
-                                console.log("Followed");
-                                $scope.current_follow = data.pk;
-                            },function(error){
-                                console.log(error);
-                            });
-                    }
-                }else{
-                    if($scope.current_follow){
-                        Question.revokeFollow({article_id: 34, question_id: $scope.question.pk, follow_id: $scope.current_follow}, {})
-                            .$promise.then(
-                            function(data){
-                                console.log("Revoked Follow");
-                                $scope.current_follow = null;
-                            },function(error){
-                                console.log(error);
-                            });
-                    }
+            if($scope.following){
+                console.log("Simulating following");
+                $scope.question.following = true;
+
+                if(!$scope.current_follow){
+                    Question.follow({article_id: 34, question_id: $scope.question.pk}, {})
+                    .$promise.then(
+                    function(data){
+                        console.log("Followed");
+                        $scope.current_follow = data.pk;
+                        $scope.question.following = data.pk; //when the follow is posted, set the actual value
+                    },function(error){
+                        console.log(error);
+                    });
                 }
+            }else{
+                if($scope.current_follow){
+                    console.log("Simulating unfollow");
+                    $scope.question.following = false;
+
+                    Question.revokeFollow({article_id: 34, question_id: $scope.question.pk, follow_id: $scope.current_follow}, {})
+                        .$promise.then(
+                        function(data){
+                            console.log("Revoked Follow");
+                            $scope.current_follow = null;
+                        },function(error){
+                            console.log(error);
+                        });
+                }
+            }
 
 
         };

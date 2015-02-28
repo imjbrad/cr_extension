@@ -22,7 +22,12 @@ angular.module('cr.views.article', [
                 function (result) {
 
                     $scope.article = result;
-                    $scope.article.insight_votes = result.insight_votes.insight_votes;
+                    $scope.article.insight_votes = result.insight_votes;
+
+                    $scope.insightFilter = {
+                        overall: {'category': 'ov'},
+                        top: {category: 'top'}
+                    };
 
                     $scope.questionSet = [];
 

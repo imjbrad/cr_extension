@@ -10,7 +10,7 @@
 
     <section class="insights">
         <h5 class="section-header"><span>INSIGHTS</span></h5>
-        <insight-vote-panel ng-repeat="insight in article.insight_votes.top" article-pk="article.pk" insight="insight"></insight-vote-panel>
+        <insight-vote-panel ng-repeat="insight in article.insight_votes | filter:insightFilter.overall" article-pk="article.pk" insight="insight"></insight-vote-panel>
     </section>
 
     <section class="questions">

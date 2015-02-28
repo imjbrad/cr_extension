@@ -10,7 +10,7 @@
                 <div class="vote-side">
                     <div class="btn-group btn-group-justified">
                         <label class="btn btn-success" no-click require-auth ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk">
-                            {{choice.choice}} {{choice.count}} <div class="btn btn-warning" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk"></div>
+                            {{choice.choice}} {{choice.count}} <span class="cr-btn" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk">X</span>
                         </label>
                     </div>
             </div>

@@ -16,29 +16,12 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
         };
     })
 
-    .directive("noClick", function(){
-        return {
-            restrict: 'A',
-            replace: false,
-            link: function(scope, element, attr) {
-                //console.log("binding no click");
-                element.bind("click", function(e){
-                    return false;
-                });
-            }
-        };
-    })
-
     .controller("InsightVotePanelCtrl", function($rootScope, $scope, Vote, $timeout, $state, CRAuth, $location, CRAlerts){
 
         function getVote(){
-            if(CRAuth.current_user){
-                Vote.authGET({ article_id: $scope.article, topic_id: $scope.insight.pk}, function(vote){
-                    console.log(vote);
-                    //console.log("Current Vote found");
-                    $scope.currentVote = vote;
-                    $scope.radioModel.selectedChoice = ''+vote.choice;
-                });
+            if ($scope.insight.user_vote){
+                $scope.currentVote = $scope.insight.user_vote;
+                $scope.radioModel.selectedChoice = ''+$scope.currentVote.choice;
             }
         }
 
@@ -47,22 +30,22 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             var new_choice = $scope.radioModel.selectedChoice;
             $scope.insight.insight_votes[new_choice].count += 1;
             $scope.currentVote = {choice: new_choice};
-            calculatePopularVote();
+            calculatePopularVote()
         }
 
         function simulateRevoke(swap){
             console.log("simulating revoke");
-            if($scope.currentVote && $scope.currentVote.choice) {
+            if($scope.insight.insight_votes[$scope.currentVote.choice].count > 0){
                 $scope.insight.insight_votes[$scope.currentVote.choice].count -= 1;
                 $scope.currentVote = null;
-
-                if(!swap)
-                    $scope.radioModel.selectedChoice = null;
             }
+            if(!swap)
+                $scope.radioModel.selectedChoice = null;
+            calculatePopularVote()
         }
 
         function calculatePopularVote() {
-            //console.log("calculating popular vote");
+            console.log("calculating popular vote");
             var max_count = 0,
                 max_key = "";
 
@@ -77,35 +60,11 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
             }
 
             if (max_count == 0) {
-                max_key = "Contribute to " + $scope.insight.name + " first!";
+                max_key = "Contribute to \"" + $scope.insight.name.split("_").join(" ") + "\" first!";
             }
 
             $scope.insight.popular_choice = {"choice": max_key, "count": max_count};
         }
-
-        $scope.$watch('insight', function(newvale, old){
-           calculatePopularVote();
-        });
-
-        $scope.$on('CRAuth.AuthenticationChanged', function(event, data){
-            console.log("The authentication status has changed");
-            var b = CRAuth.current_user;
-            $scope.radioModel.disabled = !CRAuth.current_user
-        });
-
-        $scope.radioModel = {
-            selectedChoice: '',
-            disabled: !CRAuth.current_user
-        };
-
-        $scope.toggleVotePanel = function($event){
-
-            if (!$scope.currentInsightPanel){
-                $scope.currentInsightPanel = $event.currentTarget;
-            }
-
-            angular.element($scope.currentInsightPanel).toggleClass("move-over");
-        };
 
         $scope.revokable = ($scope.currentVote && $scope.currentVote.choice) ? true:false;
 
@@ -137,21 +96,40 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
                         $scope.vote()
                     })
                 }else{
-                        Vote.save({ article_id: $scope.article, topic_id: $scope.insight.pk}, {choice: $scope.radioModel.selectedChoice})
-                            .$promise.then(
-                            function(result){
-                                console.log("Successful Vote");
-                                console.log(result);
-                                $scope.currentVote = result;
-                            },
-                            function(error) {
-                                console.log("pushing error");
-                                console.log(error);
-                                CRAlerts.push({msg: error.data.detail || "Something went wrong."});
-
-                            });
                     simulateVote();
+                    Vote.save({ article_id: $scope.article, topic_id: $scope.insight.pk}, {choice: $scope.radioModel.selectedChoice})
+                        .$promise.then(
+                        function(result){
+                            console.log("Successful Vote");
+                            console.log(result);
+                            $scope.currentVote = result;
+                        },
+                        function(error) {
+                            console.log("pushing error");
+                            console.log(error);
+                            CRAlerts.push({msg: error.data.detail || "Something went wrong."});
+
+                        });
                 }});
+
+        $scope.$on('CRAuth.AuthenticationChanged', function(event, data){
+            console.log("The authentication status has changed");
+            $scope.radioModel.disabled = !CRAuth.current_user
+        });
+
+        $scope.radioModel = {
+            selectedChoice: '',
+            disabled: !CRAuth.current_user
+        };
+
+        $scope.toggleVotePanel = function($event){
+
+            if (!$scope.currentInsightPanel){
+                $scope.currentInsightPanel = $event.currentTarget;
+            }
+
+            angular.element($scope.currentInsightPanel).toggleClass("move-over");
+        };
 
         $scope.init = function() {
             //console.log("Insight Vote Panel Init");

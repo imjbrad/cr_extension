@@ -142,7 +142,8 @@ body {
     padding: 4px;
     padding-top: 5px; }
     .insight-vote-panel .popular-vote .choice-label {
-      float: left; }
+      float: left;
+      text-transform: capitalize; }
     .insight-vote-panel .popular-vote .count {
       float: right; }
     .insight-vote-panel .popular-vote.move-over {
