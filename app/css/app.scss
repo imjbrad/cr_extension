@@ -29,6 +29,10 @@ html, body, #app_view, .view_container{
   font-size: 11px;
 }
 
+.view_container {
+  @include transition(background-color .2s);
+}
+
 
 body{
   position: relative;

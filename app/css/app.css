@@ -365,6 +365,11 @@ html, body, #app_view, .view_container {
   font-family: MuseoSans-300, sans-serif;
   font-size: 11px; }
 
+.view_container {
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  transition: background-color 0.2s; }
+
 body {
   position: relative;
   -webkit-transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955); }

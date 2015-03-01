@@ -2,9 +2,9 @@
  * Created by jordanbradley on 1/11/15.
  */
 
-angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
+angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'])
 
-    .factory('CRAuth', function($http, store, $location, $rootScope) {
+    .factory('CRAuth', function($http, store, $location, $rootScope, CONFIG) {
 
         var auth = {};
 
@@ -12,7 +12,7 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
 
             $http.defaults.headers.get = {Authorization: 'JWT ' + token};
 
-            $http.get('http://127.0.0.1:8000/api/me/')
+            $http.get(CONFIG.API + '/me/')
                 .success(function(data, status, headers, config) {
                     auth.current_user = {email:data.email, pk:data.user_id, token: token, exp: data.exp, original_auth: data.orig_iat ? false:true};
                     store.set("current_user", auth.current_user);
@@ -70,7 +70,7 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
             //refresh the session, set a new current user, and re-push the headers
             if(auth.current_user && auth.current_user.exp) {
                 console.log("Trying to Extend Session");
-                $http.post('http://127.0.0.1:8000/api/token-refresh/', {token: auth.current_user.token}).
+                $http.post(CONFIG.API + '/token-refresh/', {token: auth.current_user.token}).
                     success(function (data, status, headers, config) {
                         _set_current_user(data.token);
                         console.log("Extended Session");
@@ -86,7 +86,7 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage'])
         };
 
         auth.login = function(email, password, success, error) {
-            $http.post('http://127.0.0.1:8000/api/token-auth/', {email: email, password: password}).
+            $http.post(CONFIG.API + '/token-auth/', {email: email, password: password}).
                 success(function(data, status, headers, config) {
                     _set_current_user(data.token, success);
 

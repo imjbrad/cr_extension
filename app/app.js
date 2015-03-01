@@ -12,30 +12,31 @@ angular.module('cr', [
   'cr.views.article_404'
 ])
 
-    .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-      $urlRouterProvider.otherwise("/article");
-      $stateProvider
-          .state('article', {
-            url: "/article",
-            templateUrl: "/app/views/article_view/article.html"
-          })
-          .state('article.login', {
-            url: "/login",
-            views: {
-              overhead: {templateUrl: "/app/views/login_view/login.html"}
-            }
-          })
-          .state('article.alerts', {
-            url: "/alerts",
-            views: {
-              overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
-            }
-          })
+  $urlRouterProvider.otherwise("/article");
+  $stateProvider
+      .state('article', {
+        url: "/article",
+        templateUrl: "/app/views/article_view/article.html"
+      })
+      .state('article.login', {
+        url: "/login",
+        views: {
+          overhead: {templateUrl: "/app/views/login_view/login.html"}
+        }
+      })
+      .state('article.alerts', {
+        url: "/alerts",
+        views: {
+          overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
+        }
+      })
 
-         .state('article404', {
-            url: "/404",
-            templateUrl: "/app/views/article_404_view/article_404.html"
-         });
+     .state('article404', {
+        url: "/404",
+        templateUrl: "/app/views/article_404_view/article_404.html"
+     });
 
-    });
+});
+

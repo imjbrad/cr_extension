@@ -12,7 +12,7 @@
   ],
 
   "background":{
-    "page": "/app/index.html"
+
   },
 
   "browser_action": {

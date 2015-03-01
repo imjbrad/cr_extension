@@ -1,44 +1,44 @@
-angular.module('cr.services.api', ['ngResource', 'angular-storage'])
+angular.module('cr.services.api', ['ngResource', 'angular-storage', 'cr.config'])
 
-    .factory('Article', function($resource) {
-        return $resource('http://127.0.0.1:8000/api/article/:article_id', {});
+    .factory('Article', function($resource, CONFIG) {
+        return $resource(CONFIG.API + '/article/:article_id', {});
     })
 
-    .factory('Suggestion', function($resource) {
-        return $resource('http://127.0.0.1:8000/api/article/suggestion', {},{
+    .factory('Suggestion', function($resource, CONFIG) {
+        return $resource(CONFIG.API + '/api/article/suggestion', {},{
             'post': {method: 'POST'}
         });
     })
 
-    .factory('Vote', function($resource, CRAuth){
+    .factory('Vote', function($resource, CONFIG, CRAuth){
         var custom_actions = {};
         custom_actions.authGET = {method:'GET'};
         if(CRAuth.current_user && CRAuth.current_user.token){
             custom_actions.authGET.headers = {"Authorization": 'JWT '+ CRAuth.current_user.token }
         }
 
-        return $resource('http://127.0.0.1:8000/api/article/:article_id/topic/:topic_id/vote/:vote_id', {}, custom_actions);
+        return $resource(CONFIG.API + 'api/article/:article_id/topic/:topic_id/vote/:vote_id', {}, custom_actions);
     })
 
-    .factory('Question', function($resource, CRAuth){
+    .factory('Question', function($resource, CRAuth, CONFIG){
 
-        return $resource('http://127.0.0.1:8000/api/article/:article_id/question/:question_id/',{}, {
-            'ask': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/ask'},
+        return $resource(CONFIG.API + 'api/article/:article_id/question/:question_id/',{}, {
+            'ask': {method: 'POST', url:CONFIG.API + 'api/article/:article_id/question/ask'},
 
-            "upvote": {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
-            'revokeUpvote': {method: 'DELETE', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+            "upvote": {method: 'POST', url:CONFIG.API + 'api/article/:article_id/question/:question_id/upvote/:upvote_id'},
+            'revokeUpvote': {method: 'DELETE', url:CONFIG.API + 'api/article/:article_id/question/:question_id/upvote/:upvote_id'},
 
-            'follow': {method: 'POST', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/follow/:follow_id'},
-            'revokeFollow': {method: 'DELETE', url:'http://127.0.0.1:8000/api/article/:article_id/question/:question_id/follow/:follow_id'},
+            'follow': {method: 'POST', url:CONFIG.API + 'api/article/:article_id/question/:question_id/follow/:follow_id'},
+            'revokeFollow': {method: 'DELETE', url:CONFIG.API + 'api/article/:article_id/question/:question_id/follow/:follow_id'},
 
             'all': {
                 method: 'GET',
                 headers: CRAuth.current_user && CRAuth.current_user.token ? {'Authorization':'JWT '+ CRAuth.current_user.token} : {},
-                url:'http://127.0.0.1:8000/api/article/:article_id/questions/'
+                url:CONFIG.API + 'api/article/:article_id/questions/'
             }
         });
     })
 
     .factory('InsightVotes', function($resource){
-        return $resource('http://127.0.0.1:8000/api/article/:article_id/topics');
+        return $resource(CONFIG.API + 'api/article/:article_id/topics');
     });
