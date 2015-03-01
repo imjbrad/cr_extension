@@ -5,7 +5,7 @@
 
 //views
 @import "../views/article_view/article_view";
-
+@import "../views/article_404_view/article_404";
 
 //directives
 @import "../directives/question/question";
@@ -18,9 +18,7 @@
   box-sizing: border-box;
 }
 
-$app-width: 300px;
-
-html, body {
+html, body, #app_view, .view_container{
   width: $app-width;
   height: 600px;
   margin: 0;
@@ -29,12 +27,11 @@ html, body {
 
   font-family: MuseoSans-300, sans-serif;
   font-size: 11px;
-
 }
+
 
 body{
   position: relative;
-  padding: 15px;
   -webkit-transition:all .2s $ease-in-out-quad;
 }
 

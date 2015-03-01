@@ -1,7 +1,13 @@
 angular.module('cr.services.api', ['ngResource', 'angular-storage'])
 
     .factory('Article', function($resource) {
-        return $resource('http://127.0.0.1:8000/api/article/:article_id');
+        return $resource('http://127.0.0.1:8000/api/article/:article_id', {});
+    })
+
+    .factory('Suggestion', function($resource) {
+        return $resource('http://127.0.0.1:8000/api/article/suggestion', {},{
+            'post': {method: 'POST'}
+        });
     })
 
     .factory('Vote', function($resource, CRAuth){

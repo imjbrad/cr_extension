@@ -83,6 +83,10 @@ button.cr-btn {
   max-height: 0;
   overflow: hidden; }
 
+#article_view {
+  background-color: white;
+  padding: 15px; }
+
 .article-info {
   font-family: MuseoSans-700, sans-serif;
   color: black;
@@ -164,6 +168,90 @@ button.cr-btn {
     border-radius: 2px; }
   .questions .question-list .pager .previous.disabled, .questions .question-list .pager .next.disabled {
     display: none; }
+
+#article_404_view {
+  background-color: #494949; }
+
+@-webkit-keyframes fadeIn {
+  to {
+    opacity: 1;
+    margin-top: 100px; } }
+@-moz-keyframes fadeIn {
+  to {
+    opacity: 1;
+    margin-top: 100px; } }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    margin-top: 100px; } }
+#container {
+  width: 180px;
+  margin: auto;
+  padding: 0 10px;
+  margin-top: 170px;
+  opacity: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  -webkit-animation: fadeIn 0.2s 0.2s forwards;
+  -moz-animation: fadeIn 0.2s 0.2s forwards;
+  animation: fadeIn 0.2s 0.2s forwards; }
+  #container #logo {
+    width: 60px;
+    height: auto;
+    display: block;
+    margin-bottom: 15px; }
+  #container #message {
+    color: white;
+    line-height: 1.3em;
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
+    margin-bottom: 15px; }
+  #container #thankyou {
+    font-weight: bold;
+    color: white; }
+  #container #suggestionText {
+    resize: none;
+    width: 100%;
+    height: 90px;
+    padding: 5px;
+    margin-bottom: 15px; }
+    #container #suggestionText::-webkit-input-placeholder {
+      color: black;
+      opacity: .4; }
+    #container #suggestionText::-moz-placeholder {
+      color: black;
+      opacity: .4; }
+    #container #suggestionText:-moz-placeholder {
+      color: black;
+      opacity: .4; }
+    #container #suggestionText:-ms-input-placeholder {
+      color: black;
+      opacity: .4; }
+  #container .action-btn {
+    width: 150px; }
+    #container .action-btn:not(:last-of-type) {
+      margin-bottom: 5px; }
 
 .question {
   overflow: auto;
@@ -268,7 +356,7 @@ button.cr-btn {
   user-select: none;
   box-sizing: border-box; }
 
-html, body {
+html, body, #app_view, .view_container {
   width: 300px;
   height: 600px;
   margin: 0;
@@ -279,7 +367,6 @@ html, body {
 
 body {
   position: relative;
-  padding: 15px;
   -webkit-transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
 
 ::-webkit-scrollbar {

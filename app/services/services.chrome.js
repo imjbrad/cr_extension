@@ -8,6 +8,7 @@ angular.module('cr.services.chrome', [])
         var chromeService = {},
             _currentUrl = null;
 
+
         chromeService.getCurrentUrl = function(callbackfn){
 
             if(_currentUrl)
@@ -22,6 +23,7 @@ angular.module('cr.services.chrome', [])
                 console.log(_currentUrl);
                 callbackfn(_currentUrl);
             });
+
 
         };
 

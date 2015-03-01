@@ -11,17 +11,19 @@ angular.module('cr.views.article', [
     'angular-storage'
 ])
 
-    .controller('ArticleViewCtrl', function($scope, Article, Question, CRAuth, $filter, $http, CRChrome, $location) {
+    .controller('ArticleViewCtrl', function($scope, Article, Question, CRAuth, $filter, $http, CRChrome, $state) {
 
         function init(url){
+            console.log("from: "+url);
 
             $scope.article_url = url;
-            $scope.article_id = 34;
+            $scope.article_id = null;
 
-            Article.get({ article_id: $scope.article_id, url: $scope.article_url },
+            Article.get({ article_id: $scope.article_id, url: $scope.article_url},
                 function (result) {
 
                     $scope.article = result;
+                    $scope.article_id = result.pk;
                     $scope.article.insight_votes = result.insight_votes;
 
                     $scope.insightFilter = {
@@ -86,16 +88,16 @@ angular.module('cr.views.article', [
 
 
                 },function(error){
+                    console.log(error);
                     redirect();
                 });
-        }
+        };
 
         function redirect(){
             console.log("Article Not Found");
+            $state.go("article404", {url: $scope.article_url});
         }
 
-        //CRChrome.getCurrentUrl(init, redirect);
-
-        init();
+        CRChrome.getCurrentUrl(init);
 
 });

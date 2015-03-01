@@ -8,7 +8,8 @@ angular.module('cr', [
 
   'cr.views.login',
   'cr.views.article',
-  'cr.views.alerts'
+  'cr.views.alerts',
+  'cr.views.article_404'
 ])
 
     .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -30,6 +31,11 @@ angular.module('cr', [
             views: {
               overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
             }
-          });
+          })
+
+         .state('article404', {
+            url: "/404",
+            templateUrl: "/app/views/article_404_view/article_404.html"
+         });
 
     });

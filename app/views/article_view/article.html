@@ -1,50 +1,52 @@
-<section ui-view="overhead" class="overhead">
-</section>
-<section ng-controller="ArticleViewCtrl" ng-show="article" id="article">
-
-    <header class="article-info">
-        {{ article.title }} &#8212;<span class="author" ng-repeat="author in article.authors">{{ author.name }}{{$last-1 ? ', & ' : ($last ? '' : ', ')}}</span>
-        <br>
-        <span id="publisher">from {{ article.publisher.name }}</span>
-    </header>
-
-    <section class="insights">
-        <h5 class="section-header"><span>INSIGHTS</span></h5>
-        <insight-vote-panel ng-repeat="insight in article.insight_votes | filter:insightFilter.overall" article-pk="article.pk" insight="insight"></insight-vote-panel>
+<div id="article_view" class="view_container">
+    <section ui-view="overhead" class="overhead">
     </section>
+    <section ng-controller="ArticleViewCtrl" ng-show="article" id="article">
 
-    <section class="questions">
-        <h5 class="section-header"><span>TOP QUESTIONS</span></h5>
+        <header class="article-info">
+            {{ article.title }} &#8212;<span class="author" ng-repeat="author in article.authors">{{ author.name }}{{$last-1 ? ', & ' : ($last ? '' : ', ')}}</span>
+            <br>
+            <span id="publisher">from {{ article.publisher.name }}</span>
+        </header>
 
-        <div id="questionSettingsPanel">
-            <input class="filterSwitch" id="noFilterFilter" type="radio" ng-model="questionFilter.selected" ng-change="" name="filter" value="">
-            <label class="filterSwitchLabel" for="noFilterFilter">All</label>
+        <section class="insights">
+            <h5 class="section-header"><span>INSIGHTS</span></h5>
+            <insight-vote-panel ng-repeat="insight in article.insight_votes | filter:insightFilter.overall" article-pk="article.pk" insight="insight"></insight-vote-panel>
+        </section>
 
-            <input class="filterSwitch" id="myQuestionsFilter" type="radio" ng-show="CRAuth.authenticated" ng-model="questionFilter.selected" ng-change="" name="filter" value="me">
-            <label class="filterSwitchLabel" for="myQuestionsFilter">My Questions</label>
+        <section class="questions">
+            <h5 class="section-header"><span>TOP QUESTIONS</span></h5>
 
-            <input class="filterSwitch" id="answeredFilter" type="radio" ng-model="questionFilter.selected" name="filter" ng-change="" value="answered">
-            <label class="filterSwitchLabel" for="answeredFilter">Answered</label>
+            <div id="questionSettingsPanel">
+                <input class="filterSwitch" id="noFilterFilter" type="radio" ng-model="questionFilter.selected" ng-change="" name="filter" value="">
+                <label class="filterSwitchLabel" for="noFilterFilter">All</label>
 
-            <!--<input class="filterSwitch" id="followingFilter" type="radio" ng-show="CRAuth.authenticated" ng-model="questionFilter.selected" name="filter" value="answered">-->
-            <!--<label class="filterSwitchLabel" for="followingFilter">Following</label>-->
+                <input class="filterSwitch" id="myQuestionsFilter" type="radio" ng-show="CRAuth.authenticated" ng-model="questionFilter.selected" ng-change="" name="filter" value="me">
+                <label class="filterSwitchLabel" for="myQuestionsFilter">My Questions</label>
 
-        </div>
+                <input class="filterSwitch" id="answeredFilter" type="radio" ng-model="questionFilter.selected" name="filter" ng-change="" value="answered">
+                <label class="filterSwitchLabel" for="answeredFilter">Answered</label>
 
-        <form id="questionForm" name="questionForm" ng-submit="askQuestion(questionForm.$valid)" novalidate>
-            <textarea  placeholder="It's all about asking the right questions..." name="question" class="form-control" ng-model="question.title" required ng-maxlength="160"></textarea>
-            <div id="questionSubmitPanel">
-                <button id="questionSubmit" type="submit" ng-disabled="questionForm.$invalid" class="cr-btn">Ask Question</button>
+                <!--<input class="filterSwitch" id="followingFilter" type="radio" ng-show="CRAuth.authenticated" ng-model="questionFilter.selected" name="filter" value="answered">-->
+                <!--<label class="filterSwitchLabel" for="followingFilter">Following</label>-->
+
             </div>
-        </form>
 
-        <ul class="question-list">
-            <question ng-repeat="question in filteredQuestions = (questionSet.allQuestions  | filter: questionFilter[questionFilter.selected] | orderBy: questionFilter.orderBy : true)" question="question"></question>
-            <li ng-show="!filteredQuestions.length"></li>
-            <button class="cr-btn" id="more-questions-button" ng-show="questionSet.next" ng-click="getMoreQuestions()">More Questions</button>
-        </ul>
+            <form id="questionForm" name="questionForm" ng-submit="askQuestion(questionForm.$valid)" novalidate>
+                <textarea  placeholder="It's all about asking the right questions..." name="question" class="form-control" ng-model="question.title" required ng-maxlength="160"></textarea>
+                <div id="questionSubmitPanel">
+                    <button id="questionSubmit" type="submit" ng-disabled="questionForm.$invalid" class="cr-btn">Ask Question</button>
+                </div>
+            </form>
 
-        <div ui-view="questions_inline" auto-scroll="true" class="move-slide">
-        </div>
+            <ul class="question-list">
+                <question ng-repeat="question in filteredQuestions = (questionSet.allQuestions  | filter: questionFilter[questionFilter.selected] | orderBy: questionFilter.orderBy : true)" question="question"></question>
+                <li ng-show="!filteredQuestions.length"></li>
+                <button class="cr-btn" id="more-questions-button" ng-show="questionSet.next" ng-click="getMoreQuestions()">More Questions</button>
+            </ul>
+
+            <div ui-view="questions_inline" auto-scroll="true" class="move-slide">
+            </div>
+        </section>
     </section>
-</section>
+</div>

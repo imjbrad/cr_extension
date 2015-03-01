@@ -1,0 +1,13 @@
+<div id="article_404_view" class="view_container" ng-controller="Article404Ctrl">
+    <div id="container">
+        <img id="logo" src="assets/logo.png">
+        <div id="message">
+            For now, this article isn't on CR. Soon, adding new articles will be a public feature.
+        </div>
+        <div ng-hide="submitted">
+            <textarea id="suggestionText" ng-show="suggestionBox" placeholder="Suggest Insights that could be measured for this article."></textarea>
+            <button class="action-btn btn btn-success" ng-click="suggestClick()">{{ suggestionBox ? "Send" : "Suggest This Article" }}</button>
+        </div>
+        <div id="thankyou" ng-show="submitted">Thank You!</div>
+    </div>
+</div>
