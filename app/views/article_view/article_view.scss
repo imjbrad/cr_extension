@@ -1,0 +1,121 @@
+.article-info{
+  font-family: MuseoSans-700, sans-serif;
+  color: black;
+  padding: 4px;
+  font-size: 14px;
+
+  .author{
+    font-family: MuseoSlab-500Italic, serif;
+  }
+
+  #publisher{
+    margin-top: 6px;
+    display: inline-block;
+    padding: 4px 8px;
+    border:2px solid black;
+    color: black;
+    border-radius: 2px;
+    font-family: MuseoSans-700, sans-serif;
+    font-size: 11px;
+  }
+}
+
+.questions{
+
+  #questionSettingsPanel{
+
+    text-align: center;
+
+    .filterSwitchLabel {
+      margin-right: 10px;
+      font-weight: normal;
+      @include transition(all .3s);
+    }
+
+    .filterSwitch {
+      display: none;
+
+      &:checked + .filterSwitchLabel {
+        font-family: MuseoSans-700, sans-serif;
+      }
+    }
+  }
+
+  #questionForm {
+
+    border: 2px solid black;
+    margin-top: 4px;
+    margin-bottom: 9px;
+    border-radius: 2px;
+
+    textarea{
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid black;
+      color: black;
+      font-family: MuseoSlab-500Italic, sans-serif;
+      font-size: inherit;
+      resize: none;
+      border-radius: 0;
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    #questionSubmitPanel{
+      text-align: center;
+
+      #questionSubmit{
+        border: none;
+        color:black;
+        background-color: initial;
+        font-family: MuseoSans-700, sans-serif;
+        font-size: 11px;
+        border-radius: 2px;
+        padding: 6px;
+
+        @include transition(all .3s);
+        &:hover {
+          @include transform(scale(1.1));
+        }
+      }
+    }
+
+  }
+
+  .question-list{
+
+    padding: 0 6px;
+    font-size: 12px;
+    list-style: none;
+
+    #more-questions-button {
+      font-family: MuseoSans-700, sans-serif;
+      border: 2px solid black;
+      border-radius: 2px;
+      width: 100%;
+
+      &.disabled {
+        display: none;
+      }
+
+    }
+
+    .pager {
+
+      .previous, .next {
+        a {
+          border: 2px solid black;
+          border-radius: 2px;
+        }
+
+        &.disabled {
+          display: none;
+        }
+      }
+    }
+
+  }
+}

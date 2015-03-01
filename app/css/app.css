@@ -83,28 +83,6 @@ button.cr-btn {
   max-height: 0;
   overflow: hidden; }
 
-* {
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  box-sizing: border-box; }
-
-html, body {
-  width: 300px;
-  height: 600px;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: MuseoSans-300, sans-serif;
-  font-size: 11px; }
-
-body {
-  position: relative;
-  padding: 15px;
-  -webkit-transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
-
 .article-info {
   font-family: MuseoSans-700, sans-serif;
   color: black;
@@ -121,57 +99,6 @@ body {
     border-radius: 2px;
     font-family: MuseoSans-700, sans-serif;
     font-size: 11px; }
-
-.insight-vote-panel {
-  overflow: auto;
-  width: 650px;
-  font-size: 12px; }
-  .insight-vote-panel .popular-vote, .insight-vote-panel .vote-panel {
-    float: left;
-    width: 260px;
-    height: 28px;
-    margin: 2px 0; }
-  .insight-vote-panel .popular-vote {
-    -webkit-transition: margin-left 0.2s, -webkit-box-shadow 0.3s, cubic-bezier(0.86, 0, 0.07, 1);
-    -webkit-box-shadow: none;
-    border-radius: 2px;
-    margin-right: 40px;
-    margin-left: 5px;
-    border: 2px solid black;
-    color: black;
-    padding: 4px;
-    padding-top: 5px; }
-    .insight-vote-panel .popular-vote .choice-label {
-      float: left;
-      text-transform: capitalize; }
-    .insight-vote-panel .popular-vote .count {
-      float: right; }
-    .insight-vote-panel .popular-vote.move-over {
-      margin-left: -295px; }
-    .insight-vote-panel .popular-vote:hover {
-      -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.72); }
-  .insight-vote-panel .vote-panel .button-side, .insight-vote-panel .vote-panel .vote-side {
-    align-self: center; }
-  .insight-vote-panel .vote-panel .vote-side {
-    width: 95%;
-    float: right;
-    height: 100%; }
-  .insight-vote-panel .vote-panel .button-side {
-    float: left;
-    margin-top: 4px; }
-  .insight-vote-panel .vote-panel .vote-side .btn-group, .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
-    height: 100%;
-    box-sizing: border-box; }
-  .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
-    line-height: normal;
-    padding: 0; }
-  .insight-vote-panel .vote-panel .button-side .vote-panel-back-button {
-    background-image: url("../assets/arrow.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    height: 10px;
-    width: 10px; }
 
 .questions #questionSettingsPanel {
   text-align: center; }
@@ -225,49 +152,6 @@ body {
   padding: 0 6px;
   font-size: 12px;
   list-style: none; }
-  .questions .question-list .question {
-    overflow: auto;
-    position: relative;
-    margin-bottom: 5px; }
-    .questions .question-list .question .question-control {
-      padding-top: 5px;
-      -webkit-transition: all 0.2s linear;
-      -moz-transition: all 0.2s linear;
-      transition: all 0.2s linear; }
-      .questions .question-list .question .question-control .upvote-button, .questions .question-list .question .question-control .follow-button, .questions .question-list .question .question-control .delete-button {
-        border-radius: 2px;
-        padding: 3px;
-        font-size: 11px;
-        -webkit-box-shadow: none;
-        -webkit-transition: all 0.2s linear;
-        -moz-transition: all 0.2s linear;
-        transition: all 0.2s linear; }
-        .questions .question-list .question .question-control .upvote-button:hover, .questions .question-list .question .question-control .follow-button:hover, .questions .question-list .question .question-control .delete-button:hover {
-          font-family: MuseoSans-700, sans-serif;
-          -webkit-transform: scale(1.1);
-          -moz-transform: scale(1.1);
-          -ms-transform: scale(1.1);
-          -o-transform: scale(1.1);
-          transform: scale(1.1); }
-        .questions .question-list .question .question-control .upvote-button:active, .questions .question-list .question .question-control .follow-button:active, .questions .question-list .question .question-control .delete-button:active {
-          -webkit-box-shadow: none; }
-      .questions .question-list .question .question-control .delete-button {
-        color: red; }
-    .questions .question-list .question .question-title {
-      border-radius: 2px;
-      border: 1px solid black;
-      padding: 8px;
-      position: relative;
-      -webkit-transition: all 0.3s linear;
-      -moz-transition: all 0.3s linear;
-      transition: all 0.3s linear;
-      background-color: white; }
-    .questions .question-list .question:hover .question-control {
-      opacity: 1; }
-    .questions .question-list .question.answered .question-title {
-      font-family: MuseoSans-700, sans-serif;
-      border: 2px solid #00b233;
-      color: #00b233; }
   .questions .question-list #more-questions-button {
     font-family: MuseoSans-700, sans-serif;
     border: 2px solid black;
@@ -280,6 +164,123 @@ body {
     border-radius: 2px; }
   .questions .question-list .pager .previous.disabled, .questions .question-list .pager .next.disabled {
     display: none; }
+
+.question {
+  overflow: auto;
+  position: relative;
+  margin-bottom: 5px; }
+  .question .question-control {
+    padding-top: 5px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    transition: all 0.2s linear; }
+    .question .question-control .upvote-button, .question .question-control .follow-button, .question .question-control .delete-button {
+      border-radius: 2px;
+      padding: 3px;
+      font-size: 11px;
+      -webkit-box-shadow: none;
+      -webkit-transition: all 0.2s linear;
+      -moz-transition: all 0.2s linear;
+      transition: all 0.2s linear; }
+      .question .question-control .upvote-button:hover, .question .question-control .follow-button:hover, .question .question-control .delete-button:hover {
+        font-family: MuseoSans-700, sans-serif;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1); }
+      .question .question-control .upvote-button:active, .question .question-control .follow-button:active, .question .question-control .delete-button:active {
+        -webkit-box-shadow: none; }
+    .question .question-control .delete-button {
+      color: red; }
+  .question .question-title {
+    border-radius: 2px;
+    border: 1px solid black;
+    padding: 8px;
+    position: relative;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    background-color: white; }
+  .question:hover .question-control {
+    opacity: 1; }
+  .question.answered .question-title {
+    font-family: MuseoSans-700, sans-serif;
+    border: 2px solid #00b233;
+    color: #00b233; }
+
+.insight-vote-panel {
+  overflow: auto;
+  width: 650px;
+  font-size: 12px; }
+  .insight-vote-panel .popular-vote, .insight-vote-panel .vote-panel {
+    float: left;
+    width: 260px;
+    height: 28px;
+    margin: 2px 0; }
+  .insight-vote-panel .popular-vote {
+    -webkit-transition: margin-left 0.2s, -webkit-box-shadow 0.3s, cubic-bezier(0.86, 0, 0.07, 1);
+    -webkit-box-shadow: none;
+    border-radius: 2px;
+    margin-right: 40px;
+    margin-left: 5px;
+    border: 2px solid black;
+    color: black;
+    padding: 4px;
+    padding-top: 5px; }
+    .insight-vote-panel .popular-vote .choice-label {
+      float: left;
+      text-transform: capitalize; }
+    .insight-vote-panel .popular-vote .count {
+      float: right; }
+    .insight-vote-panel .popular-vote.move-over {
+      margin-left: -295px; }
+    .insight-vote-panel .popular-vote:hover {
+      -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.72); }
+  .insight-vote-panel .vote-panel .button-side, .insight-vote-panel .vote-panel .vote-side {
+    align-self: center; }
+  .insight-vote-panel .vote-panel .vote-side {
+    width: 95%;
+    float: right;
+    height: 100%; }
+  .insight-vote-panel .vote-panel .button-side {
+    float: left;
+    margin-top: 4px; }
+  .insight-vote-panel .vote-panel .vote-side .btn-group, .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
+    height: 100%;
+    box-sizing: border-box; }
+  .insight-vote-panel .vote-panel .vote-side .btn-group .btn {
+    line-height: normal;
+    padding: 0; }
+  .insight-vote-panel .vote-panel .button-side .vote-panel-back-button {
+    background-image: url("../assets/arrow.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    height: 10px;
+    width: 10px; }
+
+* {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: border-box; }
+
+html, body {
+  width: 300px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: MuseoSans-300, sans-serif;
+  font-size: 11px; }
+
+body {
+  position: relative;
+  padding: 15px;
+  -webkit-transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
 
 ::-webkit-scrollbar {
   display: none; }

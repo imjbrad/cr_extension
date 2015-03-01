@@ -11,7 +11,7 @@ angular.module('cr.directives.question', ['cr.services.api'])
                 question: '='
             },
             controller: 'QuestionCtrl',
-            templateUrl: '/app/directives/question.html',
+            templateUrl: '/app/directives/question/question.html',
             link: function($scope, element, attr, $interval) {
 
                 if($scope.question.following){

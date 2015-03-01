@@ -1,0 +1,75 @@
+.insight-vote-panel {
+  overflow: auto;
+  width: ($app-width*2) + 50px;
+
+  font-size: 12px;
+
+  .popular-vote, .vote-panel {
+    float: left;
+    width: $app-width - 40px;
+    height: 28px;
+    margin: 2px 0;
+  }
+
+  .popular-vote {
+    -webkit-transition: margin-left .2s, -webkit-box-shadow .3s, $ease-in-out-quint;
+    -webkit-box-shadow: none;
+    border-radius: 2px;
+    margin-right: 40px;
+    margin-left: 5px;
+    border:2px solid black;
+    color: black;
+    padding: 4px;
+    padding-top: 5px;
+
+    .choice-label {
+      float:left;
+      text-transform: capitalize;
+    }
+
+    .count {
+      float: right;
+    }
+
+    &.move-over {
+      margin-left: -($app-width - 5);
+    }
+
+    &:hover{
+      -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.72);
+    }
+  }
+
+  .vote-panel{
+
+    .button-side, .vote-side {align-self: center;}
+
+    .vote-side {width: 95%; float:right; height: 100%;}
+
+    .button-side{
+      float: left;
+      margin-top: 4px;
+    }
+
+    .vote-side .btn-group, .vote-side .btn-group .btn{
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .vote-side .btn-group .btn{
+      line-height: normal;
+      padding:0;
+    }
+
+    .button-side .vote-panel-back-button{
+      background-image: url('../assets/arrow.png');
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      height: 10px;
+      width: 10px;
+
+    }
+
+  }
+}

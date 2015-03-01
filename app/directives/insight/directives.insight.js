@@ -9,7 +9,7 @@ angular.module("cr.directives.insight", ['ui.bootstrap.buttons', 'cr.services.ap
                 btnRadio: '=',
                 article: '=articlePk'
             },
-            templateUrl: '/app/directives/insight.html',
+            templateUrl: '/app/directives/insight/insight.html',
             controller: 'InsightVotePanelCtrl',
             link: function(scope, element, attr) {
             }

@@ -1,3 +1,7 @@
+$cr-green: #00b233;
+$cr-deep-blue: #2e0a75;
+$app-width: 300px;
+
 @font-face {
   font-family: MuseoSans-900, sans-serif;
   src: url("fonts/MuseoSans-900.otf");
@@ -49,9 +53,6 @@
   }
 
 }
-
-$cr-green: #00b233;
-$cr-deep-blue: #2e0a75;
 
 button.cr-btn {
   border: none;
