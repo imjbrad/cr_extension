@@ -14,12 +14,13 @@ angular.module('cr.views.article', [
     .controller('ArticleViewCtrl', function($scope, Article, Question, CRAuth, $filter, $http, CRChrome, $state) {
 
         function init(url){
-            console.log("from: "+url);
+
+            console.log("Searching for Article");
 
             $scope.article_url = url;
-            $scope.article_id = null;
+            $scope.article_id = 34;
 
-            Article.get({ article_id: $scope.article_id, url: $scope.article_url},
+            Article.get({article_id: $scope.article_id, url: $scope.article_url},
                 function (result) {
 
                     $scope.article = result;
@@ -32,6 +33,8 @@ angular.module('cr.views.article', [
                     };
 
                     $scope.questionSet = [];
+                    $scope.questionSet.allQuestions = [];
+                    $scope.question = {};
 
                     $scope.questionFilter = {
                         selected: "",
@@ -91,7 +94,7 @@ angular.module('cr.views.article', [
                     console.log(error);
                     redirect();
                 });
-        };
+        }
 
         function redirect(){
             console.log("Article Not Found");
@@ -99,5 +102,5 @@ angular.module('cr.views.article', [
         }
 
         CRChrome.getCurrentUrl(init);
-
+        //init()
 });

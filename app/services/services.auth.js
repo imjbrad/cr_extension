@@ -78,9 +78,10 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'
                     error(function (data, status, headers, config) {
                         console.log("CR tried to automatically extend your session but something went wrong. Try logging back in");
                         auth.require_login();
+                        console.log(data);
                     });
             }else{
-                console.log("No valid user available to refresh")
+                console.log("No valid user available to refresh");
                 auth.require_login();
             }
         };

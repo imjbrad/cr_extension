@@ -14,21 +14,24 @@ angular.module('cr.directives.question', ['cr.services.api'])
             templateUrl: '/app/directives/question/question.html',
             link: function($scope, element, attr, $interval) {
 
-                if($scope.question.following){
-                    $scope.current_follow = $scope.question.following;
-                    $scope.following = 1;
-                }
-
-                if($scope.question.upvoted){
-                    $scope.upvoted = 1;
-                    $scope.current_upvote = $scope.question.upvoted;
-                }
-
             }
         };
     })
 
     .controller('QuestionCtrl', function($scope, CRAuth, Question, $timeout, $interval){
+
+        //init
+
+        if($scope.question.following || $scope.current_follow){
+            $scope.current_follow = $scope.question.following;
+            $scope.following = 1;
+        }
+
+        if($scope.question.upvoted || $scope.current_upvote){
+            $scope.upvoted = 1;
+            $scope.current_upvote = $scope.question.upvoted;
+        }
+
         $scope.isQuestionOwner = (CRAuth.current_user) ? ($scope.question.user == CRAuth.current_user.pk) : false;
 
         $scope.deleteQuestion = function() {
@@ -55,7 +58,6 @@ angular.module('cr.directives.question', ['cr.services.api'])
                 $scope.question.upvotes += 1;
 
                 if(!$scope.current_upvote){
-
                     Question.upvote({article_id: 34, question_id: $scope.question.pk}, {})
                         .$promise.then(
                         function(data){
@@ -73,7 +75,6 @@ angular.module('cr.directives.question', ['cr.services.api'])
                     $scope.question.upvotes -= 1;
 
                 if($scope.current_upvote){
-
                     Question.revokeUpvote({article_id: 34, question_id: $scope.question.pk, upvote_id: $scope.current_upvote}, {})
                         .$promise.then(
                         function(data){

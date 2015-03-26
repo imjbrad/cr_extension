@@ -1,16 +1,20 @@
 <div>
     <div class="insight-vote-panel">
         <div class="popular-vote" ng-click="toggleVotePanel($event)">
-            <div><span class="choice-label">{{ insight.popular_choice.choice }}</span> <span class="count">{{insight.popular_choice.count || ""}}</span></div>
+            <span class="choice-label">{{ insight.popular_choice.choice }}</span>
+            <span ng-show="insight.popular_choice.count" class="count">{{insight.popular_choice.count}}</span>
         </div>
         <div class="vote-panel">
                 <div class="button-side">
                     <button type="button" class="cr-btn vote-panel-back-button" ng-click="toggleVotePanel(event)"></button>
                 </div>
                 <div class="vote-side">
-                    <div class="btn-group btn-group-justified">
-                        <label class="btn btn-success" no-click require-auth ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk">
-                            {{choice.choice}} {{choice.count}} <span class="cr-btn" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk">X</span>
+                    <div class="vote-btn-group btn-group-justified">
+                        <label class="vote-btn btn" no-click require-auth ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk">
+                            <div class="vote-btn-container">
+                                <span>{{choice.choice}}-{{choice.count}}</span>
+                                <span class="cr-btn vote-revoke-btn" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk">X</span>
+                            </div>
                         </label>
                     </div>
             </div>

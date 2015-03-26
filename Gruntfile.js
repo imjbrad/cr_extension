@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                     CONFIG: {
                         name: 'production',
                         API: 'http://cr-app.herokuapp.com/api'
-                    }
+                    },
                 }
             }
         }

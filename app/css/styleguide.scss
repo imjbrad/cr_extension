@@ -1,5 +1,6 @@
 $cr-green: #00b233;
 $cr-deep-blue: #2e0a75;
+$cr-space-grey: #494949;
 $app-width: 300px;
 
 @font-face {
@@ -30,40 +31,6 @@ $app-width: 300px;
 @font-face {
   font-family: MuseoSlab-100Italic, serif;
   src: url("fonts/MuseoSlab-100Italic.otf");
-}
-
-.section-header {
-
-  background-image: url("../assets/section-header-bg.png");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-
-  height: 30px;
-
-  @include display(flex);
-  @include align-items(center);
-
-  span {
-    font-family: MuseoSans-900Italic, sans-serif;
-    font-size: 15px;
-    line-height: 15px;
-    background-color: white;
-    padding: 0 6px;
-    margin:auto;
-  }
-
-}
-
-button.cr-btn {
-  border: none;
-  vertical-align: middle;
-  background:none;
-  cursor: pointer;
-
-  &:focus, &:active {
-    outline: none;
-    -webkit-box-shadow: none;
-  }
 }
 
 

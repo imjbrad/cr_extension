@@ -17,19 +17,29 @@
     border-radius: 2px;
     margin-right: 40px;
     margin-left: 5px;
-    border:2px solid black;
+    border: 2px solid black;
     color: black;
     padding: 4px;
     padding-top: 5px;
+    @include display(flex);
+    @include justify-content(space-between);
+    @include align-items(center);
 
     .choice-label {
-      float:left;
       text-transform: capitalize;
     }
 
     .count {
-      float: right;
+      //-webkit-clip-path: circle(45% at 50% 50%);
+      text-align: center;
+      min-width: 22px;
+      //height: 22px;
+      background-color: $cr-space-grey;
+      color: white;
+      padding: 2px 7px;
+      border-radius: 2px;
     }
+
 
     &.move-over {
       margin-left: -($app-width - 5);
@@ -51,12 +61,12 @@
       margin-top: 4px;
     }
 
-    .vote-side .btn-group, .vote-side .btn-group .btn{
+    .vote-side .vote-btn-group, .vote-side .vote-btn-group .vote-btn{
       height: 100%;
       box-sizing: border-box;
     }
 
-    .vote-side .btn-group .btn{
+    .vote-side .vote-btn-group .vote-btn{
       line-height: normal;
       padding:0;
     }
@@ -69,6 +79,66 @@
       height: 10px;
       width: 10px;
 
+    }
+
+    .vote-btn-group {
+
+      .vote-btn {
+        border: 2px solid black;
+        border-right: none;
+        border-radius: 0;
+        font-size: 11px;
+        position: relative;
+        cursor: pointer;
+
+        &:first-child, &:last-child{
+          border-radius: 0;
+        }
+
+        &:first-child{
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+          border-left: 2px solid black;
+          border-right: none;
+        }
+
+        &:last-child{
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+          border-right: 2px solid black;
+          border-left: 2px solid black;
+        }
+
+        .vote-btn-container{
+          @include display(flex);
+          @include justify-content(center);
+          @include align-items(center);
+
+          .vote-revoke-btn{
+            -webkit-clip-path: circle(39% at 50% 50%);
+            background-color: #ff4d48;
+            padding-top: 5px;
+            font-size: 8px;
+            color: white;
+            height: 20px;
+            width: 20px;
+            @include align-self(center);
+            font-family: MuseoSans-700, sans-serif;
+            margin-left: 2px;
+
+            &:active {
+              background-color: #c13f3a;
+            }
+
+            &:hover {
+              background-color: #c13f3a;
+            }
+          }
+
+
+        }
+
+      }
     }
 
   }

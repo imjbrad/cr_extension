@@ -17,6 +17,10 @@ angular.module('cr.views.article_404', ['cr.services.api', 'cr.services.chrome']
 
                     function(data){
                         console.log(data);
+                    },
+                    function(error){
+                        console.log(error);
+                        console.log(error.data);
                     });
             }else{
                 $scope.suggestionBox = true;
