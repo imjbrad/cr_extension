@@ -1,4 +1,4 @@
-/* app css stylesheet */
+// base stuff
 @import "base/bourbon/bourbon";
 @import "styleguide";
 @import "view_transitions";
@@ -6,6 +6,7 @@
 //views
 @import "../views/article_view/article_view";
 @import "../views/article_404_view/article_404";
+@import "../views/login_view/login_view";
 
 //directives
 @import "../directives/question/question";
@@ -104,5 +105,40 @@ button.cr-btn {
       border-left: 2px solid black;
     }
 
+  }
+}
+
+.cr-text-input {
+  border: 2px solid black;
+  border-radius: 2px;
+}
+
+.cr-text-input-group{
+
+  .form-control{
+    font-size: 11px;
+    height: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: black;
+      box-shadow: none;
+    }
+
+  }
+
+  .form-control:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: none;
+  }
+
+  .form-control:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
 }

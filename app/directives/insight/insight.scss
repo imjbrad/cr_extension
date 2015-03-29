@@ -1,7 +1,6 @@
 .insight-vote-panel {
   overflow: auto;
   width: ($app-width*2) + 50px;
-
   font-size: 12px;
 
   .popular-vote, .vote-panel {
@@ -38,6 +37,7 @@
       color: white;
       padding: 2px 7px;
       border-radius: 2px;
+      margin-right: -2px;
     }
 
 
@@ -116,10 +116,10 @@
 
           .vote-revoke-btn{
             -webkit-clip-path: circle(39% at 50% 50%);
-            background-color: #ff4d48;
-            padding-top: 5px;
+            //background-color: #ff4d48;
+            padding-top: 2px;
             font-size: 8px;
-            color: white;
+            color: #ff4d48;
             height: 20px;
             width: 20px;
             @include align-self(center);
@@ -127,11 +127,11 @@
             margin-left: 2px;
 
             &:active {
-              background-color: #c13f3a;
+              color: #c13f3a;
             }
 
             &:hover {
-              background-color: #c13f3a;
+              color: #c13f3a;
             }
           }
 

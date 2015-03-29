@@ -18,9 +18,9 @@ angular.module('cr.views.article', [
             console.log("Searching for Article");
 
             $scope.article_url = url;
-            $scope.article_id = 34;
+            //$scope.article_id = 34;
 
-            Article.get({article_id: $scope.article_id, url: $scope.article_url},
+            Article.get({url: $scope.article_url},
                 function (result) {
 
                     $scope.article = result;
@@ -39,7 +39,7 @@ angular.module('cr.views.article', [
                     $scope.questionFilter = {
                         selected: "",
                         answered: {'answered': true},
-                        me: {'user': CRAuth.current_user.pk},
+                        me: {'user': CRAuth.current_user ? CRAuth.current_user.pk : null},
                         orderBy: ['answered', 'upvotes']
                     };
 

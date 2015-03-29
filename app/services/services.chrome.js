@@ -31,7 +31,8 @@ angular.module('cr.services.chrome', [])
             if(_currentUrl)
                 return _currentUrl;
 
-            _currentUrl = $location.absUrl();
+            //hardcoded sample url
+            _currentUrl = "http://www.cnn.com/2015/01/04/us/new-york-detective-liu-funeral"
 
             if(callback) {
                 callback(_currentUrl);

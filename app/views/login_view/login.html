@@ -1,10 +1,13 @@
-<div class="login overhead-content" ng-controller="LoginCtrl">
-    <div ng-show="auth_error" class="alert alert-danger">{{auth_error}}</div>
-    <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
-
-        <input type="email" placeholder="email" name="email" class="form-control" ng-model="user.email" required>
-        <input type="password" name="password" placeholder="password" class="form-control" ng-model="user.password" ng-minlength="3" ng-maxlength="16" required>
-        <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Submit</button>
-
-    </form>
+<div id="login_view" class="overhead-content" ng-controller="LoginCtrl">
+    <div id="login_view_content">
+        <a ui-sref="article"><i id="close_button" class="fa fa-2x fa-times-circle"></i></a>
+        <div ng-show="auth_error" id="login-error-box">Incorrect login info. Could you try again?</div>
+        <form id="loginForm" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+        <span class="login-form-input-group cr-text-input-group">
+            <input type="email" placeholder="email" name="email" class="form-control cr-text-input" ng-model="user.email" required>
+            <input type="password" name="password" placeholder="password" class="form-control cr-text-input" ng-model="user.password" ng-minlength="3" ng-maxlength="16" required>
+        </span>
+            <button id="loginButton" type="submit" ng-disabled="loginForm.$invalid" class="cr-btn btn">Authenticate</button>
+        </form>
+    </div>
 </div>

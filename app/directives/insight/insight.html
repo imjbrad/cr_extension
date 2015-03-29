@@ -10,10 +10,10 @@
                 </div>
                 <div class="vote-side">
                     <div class="vote-btn-group btn-group-justified">
-                        <label class="vote-btn btn" no-click require-auth ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk">
+                        <label class="vote-btn btn" no-click ng-disabled="!CRAuth.authenticated" ng-repeat="(choice_pk, choice) in insight.insight_votes" ng-change="vote();" ng-model="radioModel.selectedChoice" btn-radio="choice_pk">
                             <div class="vote-btn-container">
                                 <span>{{choice.choice}}-{{choice.count}}</span>
-                                <span class="cr-btn vote-revoke-btn" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk">X</span>
+                                <span class="cr-btn vote-revoke-btn" ng-click="revoke(); $event.stopPropagation();" ng-show="radioModel.selectedChoice == choice_pk"><i id="close_button" class="fa fa-2x fa-times-circle"></i></span>
                             </div>
                         </label>
                     </div>

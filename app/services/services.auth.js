@@ -4,9 +4,10 @@
 
 angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'])
 
-    .factory('CRAuth', function($http, store, $location, $rootScope, CONFIG) {
+    .factory('CRAuth', function($http, store, $location, $rootScope, $state, CONFIG) {
 
         var auth = {};
+        $rootScope.CRAuth = {};
 
         function _set_current_user(token, success){
 
@@ -18,7 +19,6 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'
                     store.set("current_user", auth.current_user);
 
                     $rootScope.$broadcast('CRAuth.AuthenticationChanged');
-                    $rootScope.CRAuth = {};
                     $rootScope.CRAuth.authenticated = true;
 
                     _push_auth_headers();
@@ -29,14 +29,13 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'
                 })
                 .error(function(data, status, headers, config) {
                     console.log(data);
-                    auth.require_login();
+                    //auth.require_login();
                 });
         }
 
         function _push_auth_headers(){
             if(auth.current_user && auth.current_user.token){
                 var header = 'JWT ' + auth.current_user.token;
-
                 $http.defaults.headers.common.Authorization = header;
                 console.log($http.defaults);
             }
@@ -50,16 +49,14 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'
         auth.require_login = function(fn) {
             if(fn){
                 if(!auth.current_user){
-                    return function(){
-                        console.log("Requiring Login");
-                        $location.url('/article/login');
-                    }
+                    return auth.require_login
                 }else{
                     return fn;
                 }
             }else{
                 console.log("Requiring Login");
-                $location.url('/article/login');
+                $state.go("article.login");
+                //$location.url('/article/login');
             }
         };
 
@@ -77,12 +74,14 @@ angular.module('cr.services.auth', ['ngResource', 'angular-storage', 'cr.config'
                     }).
                     error(function (data, status, headers, config) {
                         console.log("CR tried to automatically extend your session but something went wrong. Try logging back in");
+                        //flush invalid or incorrect user data and ask them to log back in
+                        auth.logout();
                         auth.require_login();
                         console.log(data);
                     });
             }else{
-                console.log("No valid user available to refresh");
-                auth.require_login();
+                console.log("No valid user available to refresh, flushing");
+                auth.logout();
             }
         };
 

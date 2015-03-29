@@ -14,20 +14,20 @@ angular.module('cr', [
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-  $urlRouterProvider.otherwise("/article");
+  $urlRouterProvider.otherwise("/");
   $stateProvider
       .state('article', {
-        url: "/article",
+        url: "/",
         templateUrl: "/app/views/article_view/article.html"
       })
       .state('article.login', {
-        url: "/login",
+        url: "login",
         views: {
           overhead: {templateUrl: "/app/views/login_view/login.html"}
         }
       })
       .state('article.alerts', {
-        url: "/alerts",
+        url: "alerts",
         views: {
           overhead: {templateUrl: "/app/views/alerts_view/alerts.html"}
         }

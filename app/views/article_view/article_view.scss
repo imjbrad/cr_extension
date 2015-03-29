@@ -3,21 +3,33 @@
   padding: 15px;
 }
 
-.article-info{
-  font-family: MuseoSans-700, sans-serif;
-  color: white;
-  font-size: 14px;
-
+#overhead {
   position: fixed;
   top:0;
   left: 0;
   width: $app-width;
-  background-color: #494949;
-  padding: 15px;
   z-index: 1000;
-
   -webkit-box-shadow: 0px 10px 16px -8px rgba(0,0,0,0.75);
 
+  #aux-bar {
+    background-color: #c14237;
+    color: white;
+    padding: 5px 15px;
+    @include display(flex);
+    @include justify-content(flex-start);
+
+    .fa {
+      color: white;
+    }
+  }
+}
+
+.article-info{
+  font-family: MuseoSans-700, sans-serif;
+  color: white;
+  font-size: 14px;
+  padding: 15px;
+  background-color: #494949;
 
   .author{
     font-family: MuseoSlab-500Italic, serif;
@@ -36,7 +48,7 @@
 }
 
 .insights{
-  margin-top: 99px;
+  margin-top: 119px;
   margin-bottom: 25px;
 }
 
@@ -95,11 +107,12 @@
         font-size: 11px;
         border-radius: 2px;
         padding: 6px;
-
         @include transition(all .3s);
-        &:hover {
+
+        &:not(:disabled):hover {
           @include transform(scale(1.1));
         }
+
       }
     }
 

@@ -1,32 +1,22 @@
 <li class="question" ng-class="{'answered':question.answered}" ng-show="question.pk">
     <div ng-show="question.answered" class="answered-tag">
-        Answered
+    Answered
     </div>
     <div class="question-title">
         {{question.title}}
     </div>
     <div class="question-control">
         <form id="questionControlForm" name="question.questionControlForm" novalidate>
-            <!--<button type="button" class="btn btn-primary"  name="upvote_button" ng-model="upvoted" ng-change="toggle_upvote()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">-->
-                <!--{{question.upvotes}}^-->
-            <!--</button>-->
-            <!--<button type="button" class="btn btn-primary" name="follow_button" ng-model="following" ng-change="toggle_follow()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">-->
-                <!--{{ following ? "Following" : "Follow"}}-->
-            <!--</button>-->
-            <!--<button class=" share-button btn-primary" name="share_button" ng-click="">Share</button>-->
-            <!--<button class=" delete-button btn-primary" name="delete_button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</button>-->
-
             <div class="cr-btn-group btn-group-justified">
-                <label class="cr-btn btn" name="upvote_button" ng-model="upvoted" ng-change="toggle_upvote()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-                    {{question.upvotes}} {{!question.upvotes || question.upvotes > 1 ? "Upvotes" : "Upvote"}}
-                </label>
-                <label type="button" class="cr-btn btn" name="follow_button" ng-model="following" ng-change="toggle_follow()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-                    {{ following ? "Following" : "Follow"}}
-                </label>
-                <!--<label class=" share-button cr-btn btn" name="share_button" ng-click="">Share</label>-->
-                <label class=" delete-button cr-btn btn" name="delete_button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</label>
+                    <label ng-disabled="!CRAuth.authenticated" class="cr-btn btn" name="upvote_button" ng-model="upvoted" ng-change="toggle_upvote()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                        {{question.upvotes}} {{!question.upvotes || question.upvotes > 1 ? "Upvotes" : "Upvote"}}
+                    </label>
+                    <label ng-disabled="!CRAuth.authenticated" type="button" class="cr-btn btn" name="follow_button" ng-model="following" ng-change="toggle_follow()" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                        {{ following ? "Following" : "Follow"}}
+                    </label>
+                    <!--<label class=" share-button cr-btn btn" name="share_button" ng-click="">Share</label>-->
+                    <label ng-disabled="!CRAuth.authenticated" class=" delete-button cr-btn btn" name="delete_button" ng-show="isQuestionOwner" ng-click="deleteQuestion()">Remove</label>
             </div>
-
         </form>
     </div>
 </li>

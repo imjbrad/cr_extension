@@ -1,0 +1,45 @@
+@include keyframes(pop){
+  to{
+    @include transform(scale(1));
+  }
+}
+
+#login_view {
+  background-color: #c14237;
+  padding: 15px;
+
+  #login_view_content {
+    @include transform(scale(.8));
+    @include animation(pop .3s forwards);
+  }
+
+  #close_button {
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  #loginForm {
+    font-family: MuseoSans-300, sans-serif;
+  }
+
+  .login-form-input-group{
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  #loginButton{
+    border: 2px solid white;
+    border-radius: 2px;
+    font-size: 11px;
+    color: white;
+    font-family: MuseoSans-700, sans-serif;
+  }
+
+  #login-error-box {
+    padding: 10px 5px;
+    border: 2px solid black;
+    margin-bottom:8px;
+    font-family: MuseoSans-700, sans-serif;
+    background-color: white;
+  }
+}
